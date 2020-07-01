@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin 
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - docker build -t danieliver/ezops-test-daniel .
+  post_build:
+    commands:
+      - docker push danieliver/ezops-test-daniel
