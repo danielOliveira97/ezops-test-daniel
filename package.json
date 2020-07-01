@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "demo chat app",
   "main": "index.js",
-  "scripts": {
-    "test": "jasmine"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -14,8 +12,5 @@
     "mongoose": "^5.7.5",
     "socket.io": "^2.1.1"
   },
-  "devDependencies": {
-    "jasmine": "^3.1.0",
-    "request": "^2.87.0"
-  }
+  "devDependencies": {}
 }
