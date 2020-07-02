@@ -1,24 +1,17 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
       nodejs: 12
     commands:
-      - aws --version
-      - $(aws ecr get-login --region us-east-2)
+      - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin 
   pre_build:
     commands:
       - npm install
-      - REPOSITORY_URI=362356249174.dkr.ecr.us-east-1.amazonaws.com/ezops-test
   build:
     commands:
-      - echo Build started     
       - docker build -t danieliver/node-simple-chat .
   post_build:
     commands:
-      - echo Build completed
       - docker push danieliver/node-simple-chat
-      - echo Writing definitions file...
-      - printf '[{"name":"ezops-test-node-app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > taskdefinition.json
-artifacts:
-    files: taskdefinition.json
