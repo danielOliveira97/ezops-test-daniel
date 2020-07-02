@@ -15,3 +15,7 @@ phases:
   post_build:
     commands:
       - docker push danieliver/node-simple-chat
+      - echo Writing definitions file...
+      - printf '[{"name":"project-test","imageUri":"%s"}]' danieliver/node-simple-chat > taskdefinition.json
+artifacts:
+    files: taskdefinition.json
