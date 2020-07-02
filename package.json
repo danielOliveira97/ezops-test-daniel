@@ -1,7 +1,7 @@
 {
   "name": "demo-chat-app",
-  "version": "1.0.0",
-  "description": "demo chat app",
+  "version": "1.1.0",
+  "description": "deploy 1",
   "main": "index.js",
   "scripts": {},
   "author": "",
