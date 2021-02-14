@@ -16,7 +16,12 @@ var Message = mongoose.model('Message', {
   message: String
 })
 
-var dbUrl = `mongodb://daniel:abc123@ds261817.mlab.com:61817/simple-chat`
+var DB_USER = process.env.DB_USER
+var DB_NAME = process.env.DB_NAME
+var DB_PASS = process.env.DB_PASS
+var DB_HOST = process.env.DB_HOST
+
+var dbUrl = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
 
 app.get('/messages', (req, res) => {
   Message.find({}, (err, messages) => {
@@ -60,8 +65,6 @@ app.post('/messages', async (req, res) => {
   }
 
 })
-
-
 
 io.on('connection', () => {
   console.log('a user is connected')
