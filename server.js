@@ -16,12 +16,12 @@ var Message = mongoose.model('Message', {
   message: String
 })
 
-var DB_USER = process.env.DB_USER
-var DB_NAME = process.env.DB_NAME
-var DB_PASS = process.env.DB_PASS
-var DB_HOST = process.env.DB_HOST
+//var DB_USER = process.env.DB_USER
+//var DB_NAME = process.env.DB_NAME
+//var DB_PASS = process.env.DB_PASS
+//var DB_HOST = process.env.DB_HOST
 
-var dbUrl = `mongodb://daniel:abc123@ds261817.mlab.com:61817/simple-chat`
+//var dbUrl = `mongodb://daniel:abc123@ds261817.mlab.com:61817/simple-chat`
 
 app.get('/messages', (req, res) => {
   Message.find({}, (err, messages) => {
@@ -70,12 +70,12 @@ io.on('connection', () => {
   console.log('a user is connected')
 })
 
-mongoose.connect(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, (err) => {
-  console.log('mongodb connected', err);
-})
+//mongoose.connect(dbUrl, {
+//  useNewUrlParser: true,
+//  useUnifiedTopology: true
+//}, (err) => {
+//  console.log('mongodb connected', err);
+//})
 
 var server = http.listen(3000, () => {
   console.log('server is running on port', server.address().port);
