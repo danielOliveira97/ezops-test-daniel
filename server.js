@@ -21,7 +21,7 @@ var DB_NAME = process.env.DB_NAME
 var DB_PASS = process.env.DB_PASS
 var DB_HOST = process.env.DB_HOST
 
-var dbUrl = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
+var dbUrl = `mongodb://daniel:abc123@ds261817.mlab.com:61817/simple-chat`
 
 app.get('/messages', (req, res) => {
   Message.find({}, (err, messages) => {
