@@ -5,6 +5,16 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 
+const {
+  MONGO_HOSTNAME,
+  MONGO_DBNAME,
+  BASE_URL,
+  NODE_ENV,
+  MONGO_ATLAS_URL
+} = process.env;
+
+
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -16,7 +26,15 @@ var Message = mongoose.model('Message', {
   message: String
 })
 
-var dbUrl = `mongodb://daniel:abc123@ds261817.mlab.com:61817/simple-chat`
+if (NODE_ENV === 'development') {
+  var dbUrl = `mongodb://${MONGO_HOSTNAME}/${MONGO_DBNAME}`
+} else {
+  var dbUrl = `${MONGO_ATLAS_URL}`
+}
+
+app.get('/', function(req, res) {
+  res.render('index', {baseUrl: BASE_URL });
+});
 
 app.get('/messages', (req, res) => {
   Message.find({}, (err, messages) => {
@@ -60,8 +78,6 @@ app.post('/messages', async (req, res) => {
   }
 
 })
-
-
 
 io.on('connection', () => {
   console.log('a user is connected')

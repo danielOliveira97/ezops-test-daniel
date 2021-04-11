@@ -1,0 +1,41 @@
+version: "3"
+services:
+  api:
+    container_name: node-app
+    build: .
+    environment:
+     - MONGO_HOSTNAME=mongodb
+     - MONGO_DBNAME=simple-chat
+     - BASE_URL=localhost:3000
+     - NODE_ENV=development
+     - MONGO_ATLAS_URL="mongodb+srv://simple-chat:<password>@cluster0.ljhut.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on: 
+      - mongodb
+    networks:
+      - node-app-network
+
+  mongodb:
+    image: mongo:3.6.1
+    container_name: mongodb-ezops-interview
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+    ports:
+        - 27017:27017
+    command: mongod
+    networks:
+      - node-app-network
+
+volumes:
+  mongodb-data:
+  mongodb-config:
+
+networks:
+  node-app-network:
+    driver: bridge
